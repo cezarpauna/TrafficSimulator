@@ -1,0 +1,77 @@
+PAUNA Cezar 334CB
+
+Cerinta 1:
+	-> cand ajungea un thread la intersectie, apelam sleep, dupa
+	   putea iesi din intersectie
+
+Cerinta 2:
+	-> pentru giratoriul cu n masini, am folosit un semafor, care
+	   se asigura sa nu am mai mult de n masini in intersectie
+
+Cerinta 3:
+	-> pentru fiecare banda de circulatie, am folosit cate un
+	   semafor separat care sa permita accesul unei singure
+	   masini in intersectie
+
+Cerinta 4:
+	-> la fel ca la 3 am folosit cate un semafor separat pentru
+	   fiecare banda de circulatie, doar ca acest semafor
+	   se asigura sa fie maxim x masini pe banda respectiva
+	-> am folosit si o bariera ca sa am acel numar strict de maisni
+	   intrate in intersectie
+	-> am mai folosit si o bariera care sa se asigura ca au ajuns
+	   toate thread-urile la intersectie inainte de restul operatiilor
+
+Cerinta 5:
+	-> destul de asemanator cu 4 doar ca nu mai am numar strict
+	   de masini in intersectie
+
+Cerinta 6:
+	-> am folosit doua liste, una pentru masinile cu prioritate
+	   ridicata si una cu masinile cu prioritate scazuta, pentru
+	   a tine o evidenta a masinilor care pot intra in intersectie
+	   si care trebuie sa astepte golirea acesteia
+	-> masinile cu prioritate scauzta asteapta sa nu mai existe
+	   nicio masina cu prioritate ridicata in intersectie, apoi
+	   trec toate instantaneu, golind lista lor de asteptare
+
+Cerinta 7:
+	-> am folosit un wait pe thread-uri cu urmatoarea logica:
+	   thread-urile vor astepta schimbare culorii semaforului inainte
+	   sa o afiseze
+	-> schimbarea culorii semaforului se face in Pedestrian si se da
+	   notifyAll pentru a "trezi" thread-urile si a afisa noua culoare
+	   a semaforului
+	-> la final mai afisez o data culoarea actuala a semaforului
+
+Cerinta 8:
+	-> aici am o bariera care asigura ca toate thread-urile ajung
+	   la bottleneck
+	-> apoi am doua semafoare care tin evidenta numarului de masini
+	   care au voie sa treaca de pe o banda la un moment de timp
+	-> incep cu banda 0, dau acquire la semafor, si incrementez
+	   numarul de masini care trec pe banda respectiva
+	-> daca thread-ul nu este de pe banda 0, dau acquire pt semaforul 1
+	   si incrementez numarul de masini care trec pe banda 1
+	-> cand numarul de masini de pe o banda atinge maximul, dau release
+	   pe semaforul de pe cealalta banda si asignez variabilei care
+	   tine numarul de masini de pe banda repsectiva cu 0
+
+Cerinta 9:
+	-> m-am blocat in semafoare si liste
+
+Cerinta 10:
+	-> am doua liste care tin evidenta masinilor ajunse de pe fiecare
+	   sens
+	-> bariera asigura trecerea trenului
+	-> am o variabile trainPassed folosita doar ca sa ma asigur ca un
+	   singur thread scrie mesajul de trecere al trenului
+	-> daca este de pe prima directie, afisez primul element din lista
+	   sincronizata (ca sa pastrez ordinea sosirii masinilor) si scot
+	   din lista primul element
+
+
+
+
+
+
